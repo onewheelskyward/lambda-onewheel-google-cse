@@ -20,12 +20,14 @@ exports.handler = function(event, context) {
         num: 10 // Number of search results to return between 1 and 10, inclusive
     }, function(error, response) {
         console.log(response);
-        context.succeed({
+        success = {
             response_type: 'in_channel',
             text: response.items[0].link,
             atachments: [{
                 text: response.items[0].title + ': ' + response.items[0].snippet
             }]
-        });
+        };
+        console.log(success);
+        context.succeed(success);
     });
 };
