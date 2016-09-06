@@ -23,7 +23,7 @@ exports.handler = function(event, context) {
         success = {
             response_type: 'in_channel',
             text: response.items[0].link,
-            atachments: [{
+            attachments: [{
                 text: response.items[0].title + ': ' + response.items[0].snippet
             }]
         };
