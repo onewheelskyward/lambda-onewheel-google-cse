@@ -2,7 +2,7 @@
   "name": "lambda-onewheel-google-cse",
   "version": "0.0.0",
   "description": "LAmbda Google CSE function",
-  "main": "lambda.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,5 +11,9 @@
     "url": "https://github.com/onewheelskyward/lambda-onewheel-google-cse"
   },
   "author": "Andrew Kreps",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "googleapis": "^12.4.0",
+    "querystring": "^0.2.0"
+  }
 }
