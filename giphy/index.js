@@ -11,31 +11,19 @@ exports.handler = function(event, context) {
     console.log(context);
     googleSearch.build({
         q: 'giphy ' + query.text,
+        fileType: 'gif',
         searchType: 'image',
         num: 10
     }, function(error, response) {
         console.log(response);
-        var image = '';
         console.log("pre-Item!");
-        response.items.forEach(function(r) {
-            console.log("Item!");
-            console.log(r);
-            if (r.mime == 'image/gif') {
-                console.log("Found gif, proceeding");
-                success = {
-                    response_type: 'in_channel',
-                    text: r.link
-                };
-                console.log(success);
-                context.succeed(success);
-            }
-        });
 
-    // # do some math on the image to make sure we get the animated gif here.
-    //         if image
-    //     if image['link'][/200_s.gif$/]
-    //         image['link'].gsub! /200_s.gif/, 'giphy.gif'
-    //     end
-
+        var image = response.items[0].link
+        success = {
+            response_type: 'in_channel',
+            text: image.replace('200_s.gif', 'giphy.gif') // This will take care of false static positives from google.
+        };
+        console.log(success);
+        context.succeed(success);
     });
 };
