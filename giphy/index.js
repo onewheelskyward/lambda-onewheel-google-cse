@@ -17,12 +17,14 @@ exports.handler = function(event, context) {
         num: 10
     }, function(error, response) {
         console.log(response);
-        console.log("pre-Item!");
 
-        var image = response.items[0].link
+        var image = response.items[0].link.replace('200_s.gif', 'giphy.gif');   // This will take care of false static positives from google.
         success = {
             response_type: 'in_channel',
-            text: image.replace('200_s.gif', 'giphy.gif') // This will take care of false static positives from google.
+            text: image,
+            attachments: {
+                image_url: image
+            }
         };
         console.log(success);
         superagent
@@ -31,7 +33,7 @@ exports.handler = function(event, context) {
             .set('Content-type', 'application/json')
             .end(function(err, res) {
                 console.log("Posted successfully!");
+                context.success();
             });
-        context.succeed(success);
     });
 };
