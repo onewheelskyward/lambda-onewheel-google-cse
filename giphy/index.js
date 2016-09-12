@@ -1,4 +1,5 @@
 const querystring = require('querystring');
+var superagent = require('superagent');
 var GoogleSearch = require('google-search');
 var googleSearch = new GoogleSearch({
     key: 'AIzaSyAlTbxqcZOlb3M-QXR4PCYpS2U1rfgwSlU',
@@ -24,6 +25,13 @@ exports.handler = function(event, context) {
             text: image.replace('200_s.gif', 'giphy.gif') // This will take care of false static positives from google.
         };
         console.log(success);
+        superagent
+            .post(query.response_url)
+            .send(success)
+            .set('Content-type', 'application/json')
+            .end(function(err, res) {
+                console.log("Posted successfully!");
+            });
         context.succeed(success);
     });
 };
