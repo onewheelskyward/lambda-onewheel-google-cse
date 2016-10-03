@@ -20,7 +20,14 @@ exports.handler = function(event, context) {
         else {
             console.log("Success!");
             console.log(data);
-            context.succeed();
+
+            var response = {
+                statusCode: 200,
+                headers: {},
+                body: ""
+            };
+            console.log("response: " + JSON.stringify(response));
+            context.succeed(response);
         }
     });
 };
