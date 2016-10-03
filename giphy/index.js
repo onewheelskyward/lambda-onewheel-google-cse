@@ -27,13 +27,13 @@ exports.handler = function(event, context) {
             }
         };
         console.log(success);
-        superagent
-            .post(query.response_url)
-            .send(success)
-            .set('Content-type', 'application/json')
-            .end(function(err, res) {
-                console.log("Posted successfully!");
-                context.success();
-            });
+        // superagent
+        //     .post(query.response_url)
+        //     .send(success)
+        //     .set('Content-type', 'application/json')
+        //     .end(function(err, res) {
+        //         console.log("Posted successfully!");
+        //         context.success();
+        //     });
     });
 };
