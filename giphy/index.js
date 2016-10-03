@@ -33,7 +33,7 @@ exports.handler = function(event, context) {
             .set('Content-type', 'application/json')
             .end(function(err, res) {
                 console.log("Posted successfully!");
-                callback(null, "yay2!");
+                context.succeed();
             });
     });
 };
