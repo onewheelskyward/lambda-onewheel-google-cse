@@ -1,7 +1,7 @@
 import json
 import boto3
 
-def handler(event, context):
+def lambda_handler(event, context):
     print('Starting process')
     message = event['queryStringParameters']
     print(json.dumps(message))

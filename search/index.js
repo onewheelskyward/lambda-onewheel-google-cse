@@ -1,4 +1,4 @@
-const querystring = require('querystring');
+var superagent = require('superagent');
 var GoogleSearch = require('google-search');
 var googleSearch = new GoogleSearch({
     key: 'AIzaSyAlTbxqcZOlb3M-QXR4PCYpS2U1rfgwSlU',
@@ -6,13 +6,11 @@ var googleSearch = new GoogleSearch({
 });
 
 exports.handler = function(event, context) {
-    //Echo back the text the user typed in
-    // context.succeed('You sent: ' + event.text
-    var query = querystring.parse(event['body-json']);
-    console.log(query);
+    const message = JSON.parse(event.Records[0].Sns.Message);
+    console.log('From SNS:', message);
     console.log(context);
     googleSearch.build({
-        q: query.text,
+        q: message.text,
         num: 10 // Number of search results to return between 1 and 10, inclusive
     }, function(error, response) {
         console.log(response);
@@ -24,6 +22,13 @@ exports.handler = function(event, context) {
             }]
         };
         console.log(success);
-        context.succeed(success);
+        superagent
+            .post(message.response_url)
+            .send(success)
+            .set('Content-type', 'application/json')
+            .end(function(err, res) {
+                console.log("Posted successfully!");
+                context.succeed();
+            });
     });
 };

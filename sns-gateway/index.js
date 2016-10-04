@@ -1,12 +1,8 @@
-var aws = require('aws-sdk');
 
 exports.handler = function(event, context) {
-    // var bodyJson = event['body-json'];
-    // console.log(bodyJson);
     console.log("context: " + JSON.stringify(context));
     console.log("event: " + JSON.stringify(event));
     console.log(JSON.stringify(event.queryStringParameters));
-    var sns = new aws.SNS();
     var params = {
         Message: JSON.stringify(event.queryStringParameters),
         Subject: "giphy search for",
