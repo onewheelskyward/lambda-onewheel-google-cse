@@ -1,0 +1,5 @@
+#!/usr/local/bin/fish
+zip -r py.zip index.py
+# aws lambda update-function-code --region us-west-2 --profile lambda --function-name snsGatewayImage --zip-file fileb://py.zip
+
+aws lambda create-function --region us-west-2 --runtime python2.7 --role arn:aws:iam::268578439486:role/service-role/slackGoogleRole --profile lambda --function-name snsGatewaySearch --handler index.lambda_handler --zip-file fileb://py.zip

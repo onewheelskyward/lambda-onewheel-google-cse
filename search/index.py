@@ -7,7 +7,7 @@ def handler(event, context):
     print(json.dumps(message))
     client = boto3.client('sns')
     response = client.publish(
-        TargetArn = 'arn:aws:sns:us-west-2:268578439486:slackGiphySns',
+        TargetArn = 'arn:aws:sns:us-west-2:268578439486:slackGoogleSearch',
         Message   = json.dumps({'default': json.dumps(message)}),
         MessageStructure = 'json'
     )

@@ -1,4 +1,4 @@
-const querystring = require('querystring');
+var superagent = require('superagent');
 var GoogleSearch = require('google-search');
 var googleSearch = new GoogleSearch({
     key: 'AIzaSyAlTbxqcZOlb3M-QXR4PCYpS2U1rfgwSlU',
@@ -6,11 +6,11 @@ var googleSearch = new GoogleSearch({
 });
 
 exports.handler = function(event, context) {
-    var query = querystring.parse(event['body-json']);
-    console.log(query);
+    const message = JSON.parse(event.Records[0].Sns.Message);
+    console.log('From SNS:', message);
     console.log(context);
     googleSearch.build({
-        q: query.text,
+        q: message.text,
         searchType: 'image',
         num: 10
     }, function(error, response) {
@@ -20,6 +20,13 @@ exports.handler = function(event, context) {
             text: response.items[0].link
         };
         console.log(success);
-        context.succeed(success);
+        superagent
+            .post(message.response_url)
+            .send(success)
+            .set('Content-type', 'application/json')
+            .end(function(err, res) {
+                console.log("Posted successfully!");
+                context.succeed();
+            });
     });
 };
