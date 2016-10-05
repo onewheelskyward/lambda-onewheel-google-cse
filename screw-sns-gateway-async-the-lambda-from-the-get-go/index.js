@@ -16,7 +16,6 @@ app.get('/', function (req, res) {
         .set('X-Amz-Invocation-Type', 'Event')
         .end(function(err, res) {
             console.log("Posted successfully!");
-            context.succeed();
         });
 });
 
