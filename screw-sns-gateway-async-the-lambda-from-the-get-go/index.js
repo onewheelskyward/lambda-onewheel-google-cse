@@ -1,11 +1,13 @@
 var express = require('express');
 var superagent = require('superagent');
+var querystring = require('querystring');
 var app = express();
 
 app.get('/', function (req, res) {
     res.send();
     console.log(req.query);
-    var uri = 'https://4zshsx6vlh.execute-api.us-west-2.amazonaws.com/prod/giphy?text=' + req.query.text + '&response_url=' + req.query.response_url;
+
+    var uri = 'https://4zshsx6vlh.execute-api.us-west-2.amazonaws.com/prod/giphy?' + querystring.stringify(req.query);
     console.log(uri);
 
     superagent
