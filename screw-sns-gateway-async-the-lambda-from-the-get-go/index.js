@@ -4,7 +4,7 @@ var querystring = require('querystring');
 var app = express();
 
 app.get('/', function (req, res) {
-    res.send();
+    res.send({'response_type': 'in_channel'});
     console.log(req.query);
 
     var uri = 'https://4zshsx6vlh.execute-api.us-west-2.amazonaws.com/prod/giphy?' + querystring.stringify(req.query);
