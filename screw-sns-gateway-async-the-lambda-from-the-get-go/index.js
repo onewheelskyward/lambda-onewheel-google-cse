@@ -13,7 +13,7 @@ app.get('/', function (req, res) {
     superagent
         .get(uri)
         .set('Content-type', 'application/json')
-        .set('X-Amz-Invocation-Type', 'Event')
+        .set('X-Amz-Invocation-Type', 'Event')      // Magic lambda async enable flag, but we don't need it since we've sent Slack packing several lines of code ago.
         .end(function(err, res) {
             console.log("Posted successfully!");
         });
