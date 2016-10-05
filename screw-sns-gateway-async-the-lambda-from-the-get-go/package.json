@@ -1,0 +1,19 @@
+{
+  "name": "lambda-onewheel-google-cse-image",
+  "version": "0.0.0",
+  "description": "LAmbda Google CSE image search function",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/onewheelskyward/lambda-onewheel-google-cse"
+  },
+  "author": "Andrew Kreps",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0",
+    "superagent": "^2.3.0"
+  }
+}
