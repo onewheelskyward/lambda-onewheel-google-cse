@@ -7,7 +7,7 @@ app.get('/', function (req, res) {
     res.send({'response_type': 'in_channel'});
     console.log(req.query);
 
-    var uri = 'https://4zshsx6vlh.execute-api.us-west-2.amazonaws.com/prod/giphy?' + querystring.stringify(req.query);
+    var uri = 'https://4zshsx6vlh.execute-api.us-west-2.amazonaws.com/prod' + req.query.command + '?' + querystring.stringify(req.query);
     console.log(uri);
 
     superagent
