@@ -7,7 +7,18 @@ app.get('/', function (req, res) {
     res.send({'response_type': 'in_channel'});
     console.log(req.query);
 
-    var uri = 'https://4zshsx6vlh.execute-api.us-west-2.amazonaws.com/prod' + req.query.command + '?' + querystring.stringify(req.query);
+    var hostPrefix = '';
+    switch(req.query.command) {
+        case '/giphy':
+        case '/image':
+        case '/google':
+            hostPrefix = '4zshsx6vlh';
+            break;
+        case '/geo':
+            hostPrefix = 'j8jqi56gye';
+            break;
+    }
+    var uri = 'https://' + hostPrefix + '.execute-api.us-west-2.amazonaws.com/prod' + req.query.command + '?' + querystring.stringify(req.query);
     console.log(uri);
 
     superagent
