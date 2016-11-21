@@ -1,3 +1,4 @@
 #!/usr/local/bin/fish
+rm one.zip
 zip -r one.zip index.js node_modules package.json
-aws lambda update-function-code --region us-west-2 --profile lambda --function-name slackGoogleGiphy --zip-file fileb://one.zip
+aws lambda update-function-code --region us-west-2 --profile aklambda --function-name slackGoogleGiphy --zip-file fileb://one.zip

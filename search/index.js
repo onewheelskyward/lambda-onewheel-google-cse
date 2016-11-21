@@ -1,16 +1,15 @@
 var superagent = require('superagent');
 var GoogleSearch = require('google-search');
 var googleSearch = new GoogleSearch({
-    key: 'AIzaSyAlTbxqcZOlb3M-QXR4PCYpS2U1rfgwSlU',
-    cx: '016450909327860943906:3a3e35xbkzu'
+    key: process.env.CSE_KEY,
+    cx: process.env.CSE_CX
 });
 
 exports.handler = function(event, context) {
-    const message = JSON.parse(event.Records[0].Sns.Message);
-    console.log('From SNS:', message);
-    console.log(context);
+    console.log(event.queryStringParameters);
+    console.log("Keys: " + process.env.CSE_KEY + ", " + process.env.CSE_CX);
     googleSearch.build({
-        q: message.text,
+        q: event.queryStringParameters.text,
         num: 10 // Number of search results to return between 1 and 10, inclusive
     }, function(error, response) {
         console.log(response);
@@ -23,7 +22,7 @@ exports.handler = function(event, context) {
         };
         console.log(success);
         superagent
-            .post(message.response_url)
+            .post(event.queryStringParameters.response_url)
             .send(success)
             .set('Content-type', 'application/json')
             .end(function(err, res) {

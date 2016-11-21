@@ -1,16 +1,15 @@
 var superagent = require('superagent');
 var GoogleSearch = require('google-search');
 var googleSearch = new GoogleSearch({
-    key: 'AIzaSyAlTbxqcZOlb3M-QXR4PCYpS2U1rfgwSlU',
-    cx: '016450909327860943906:3a3e35xbkzu'
+    key: process.env.CSE_KEY,
+    cx: process.env.CSE_CX
 });
 
 exports.handler = function(event, context) {
-    const message = JSON.parse(event.Records[0].Sns.Message);
-    console.log('From SNS:', message);
-    console.log("Searching google for giphy " + message.text);
+    console.log(event.queryStringParameters);
+    console.log("Keys: " + process.env.CSE_KEY + ", " + process.env.CSE_CX);
     googleSearch.build({
-        q: 'giphy ' + message.text,
+        q: 'giphy ' + event.queryStringParameters.text,
         fileType: 'gif',
         searchType: 'image',
         num: 10
@@ -26,9 +25,9 @@ exports.handler = function(event, context) {
             }
         };
         console.log(success);
-        console.log("Attempting to post to " + message.response_url);
+        console.log("Attempting to post to " + event.queryStringParameters.response_url);
         superagent
-            .post(message.response_url)
+            .post(event.queryStringParameters.response_url)
             .send(success)
             .set('Content-type', 'application/json')
             .end(function(err, res) {
