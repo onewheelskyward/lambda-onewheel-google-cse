@@ -9,6 +9,7 @@ app.get('/', function (req, res) {
 
     var hostPrefix = '';
     switch(req.query.command) {
+        case '/youtube':
         case '/giphy':
         case '/image':
         case '/google':
