@@ -15,7 +15,6 @@ exports.handler = function(event, context) {
 
     googleSearch.build({
         q: event.queryStringParameters.text + ' site:youtube.com',
-        searchType: 'video',
         num: 10
     }, function (error, response) {
         console.log(response);
