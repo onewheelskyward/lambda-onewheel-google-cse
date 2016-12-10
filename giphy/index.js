@@ -1,5 +1,7 @@
 var superagent = require('superagent');
 var GoogleSearch = require('google-search');
+var Random = require('random-js');
+
 var googleSearch = new GoogleSearch({
     key: process.env.CSE_KEY,
     cx: process.env.CSE_CX
@@ -9,7 +11,7 @@ exports.handler = function(event, context) {
     console.log(event.queryStringParameters);
     console.log("Keys: " + process.env.CSE_KEY + ", " + process.env.CSE_CX);
 
-    if (event.queryStringParameters.user_name == 'adam_the_okay') {
+    if (event.queryStringParameters.user_name == 'adam_the_okay' && Random.bool(0.1)(Random.engines.nativeMath)) {
         // var images = ['https://i.ytimg.com/vi/ZXsQAXx_ao0/maxresdefault.jpg', 'https://i.ytimg.com/vi/Alt0SKEL84M/maxresdefault.jpg', 'https://i.ytimg.com/vi/6AnAhdN9nDg/maxresdefault.jpg', 'https://i.ytimg.com/vi/Z6gG3tKDBlk/maxresdefault.jpg', 'http://cdn0.techly.com.au/wp-content/uploads/2015/06/shia.jpg', 'http://cdn.wallpapersafari.com/46/91/DumWsy.jpg', 'https://metrouk2.files.wordpress.com/2015/06/shia-labeouf.png', 'https://media.giphy.com/media/wErJXg1tIgHXG/giphy.gif', 'https://media3.giphy.com/media/esZGs2BiaIJcA/giphy.gif'];
         var image = 'https://media.giphy.com/media/104ueR8J1OPM2s/giphy.gif'; // images[Math.floor(Math.random() * images.length)];
         success = {
